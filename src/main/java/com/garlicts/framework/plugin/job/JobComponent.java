@@ -19,6 +19,7 @@ import org.quartz.spi.JobFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.garlicts.framework.FrameworkConstant;
 import com.garlicts.framework.InstanceFactory;
 import com.garlicts.framework.core.BeanLoaderTemplate;
 import com.garlicts.framework.plugin.job.annotation.Job;
@@ -68,7 +69,7 @@ public class JobComponent {
     }
 
     public static void startJobAll() {
-        List<Class<?>> jobClassList = beanLoaderTemplate.getBeanClassListBySuper(BaseJob.class);
+        List<Class<?>> jobClassList = beanLoaderTemplate.getBeanClassListBySuper(FrameworkConstant.PLUGIN_PACKAGE, BaseJob.class);
         if (CollectionUtil.isNotEmpty(jobClassList)) {
             for (Class<?> jobClass : jobClassList) {
                 if (jobClass.isAnnotationPresent(Job.class)) {
